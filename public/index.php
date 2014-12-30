@@ -1,33 +1,59 @@
 <?php
 
 require_once __DIR__.'/../bootstrap.php';
-use Symfony\Component\HttpFoundation\Response;
+use Code\Sistema\Service\ClienteService;
+use Code\Sistema\Entity\Cliente;
+use Code\Sistema\Mapper\ClienteMapper;
+use Code\Sistema\Service\ProdutoService;
+use Code\Sistema\Entity\Produto;
+use Code\Sistema\Mapper\ProdutoMapper;
 
+$pdo = new \PDO(DSN, DBUSER,DBPASS);
 
-$app->get("/", function(){
-    return "Oi!";
+$app['clienteService'] = function() {
+
+    $clienteEntity = new Cliente();
+    $clienteMapper = new ClienteMapper();
+
+    $clienteService = new ClienteService($clienteEntity, $clienteMapper);
+
+    return $clienteService;
+};
+$app['produtoService'] = function() use ($pdo) {
+
+    $produtoEntity = new Produto();
+    $produtoMapper = new ProdutoMapper($pdo);
+
+    $produtoService = new ProdutoService($produtoEntity, $produtoMapper);
+
+    return $produtoService;
+};
+
+$app->get("/", function() {
+    return "Olá mundo";
 });
 
-$clientes = array();
-$clientes[] =  array(
-        'nome' => 'Marcos da Silva',
-        'email' => 'marcos@uol.com.br',
-        'cpf' => '987.654.213-02'
-        );
+$app->get("/ola/{nome}", function($nome) {
+    return "Ola {$nome}";
+});
 
-$clientes[] =  array(
-    'nome' => 'Miranda Lawson',
-    'email' => 'miranda@cerberus.com',
-    'cpf' => '629.623.456-03'
-);
-$clientes[] =  array(
-    'nome' => 'Richard Sheppard',
-    'email' => 'commanders@n7.com',
-    'cpf' => '656.937.430-34'
-);
+$app->get("/cliente", function () use ($app) {
+    $dados['nome'] = "Cliente";
+    $dados['email'] = "email@cliente.com";
 
-$app->get("/clientes", function() use ($clientes) {
-    return json_encode($clientes);
+    $result = $app['clienteService']->insert($dados);
+
+    return $app->json($result);
+});
+
+$app->get("/produto", function () use ($app) {
+    $dados['nome'] = "Caderno";
+    $dados['descricao'] = "Caderno aramado com pautas";
+    $dados['valor'] = 6.5;
+
+    $result = $app['produtoService']->insert($dados);
+
+    return $app->json($result);
 });
 
 $app->run();
