@@ -5,7 +5,7 @@
 * Criação da rota (clientes)
 * Criação da rota (produto)
 
-### Instalação de Testes
+### Fixture
 * Criar banco de dados "api_e_silex" (sem aspas)
 * Definir no arquivo bootstrap.php os dados para acesso ao MySQL
 * Acessar raiz do projeto utilizando terminal
@@ -14,3 +14,9 @@
 php fixture.php
 ```
 
+### Testes
+* Acessar a pasta raiz do projeto
+* Iniciar servidor php executando o código abaixo no terminal
+```php
+php -S localhost:8000 -t public
+```

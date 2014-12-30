@@ -24,14 +24,10 @@ class ProdutoService
 
     public function insert(array $data)
     {
-        $produtoEntity = new Produto();
-        $produtoEntity->setNome($data['nome']);
-        $produtoEntity->setDescricao($data['descricao']);
-        $produtoEntity->setValor($data['valor']);
+        $this->produto->setNome($data['nome']);
+        $this->produto->setDescricao($data['descricao']);
+        $this->produto->setValor($data['valor']);
 
-        $mapper = $this->produtoMapper;
-        $result = $mapper->insert($produtoEntity);
-
-        return $result;
+        return $this->produtoMapper->insert($this->produto);
     }
 } 

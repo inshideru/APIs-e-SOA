@@ -18,13 +18,9 @@ class ClienteService
 
     public function insert(array $data)
     {
-        $clienteEntity = new Cliente();
-        $clienteEntity->setNome($data['nome']);
-        $clienteEntity->setEmail($data['email']);
+        $this->cliente->setNome($data['nome']);
+        $this->cliente->setEmail($data['email']);
 
-        $mapper = $this->clienteMapper;
-        $result = $mapper->insert($clienteEntity);
-
-        return $result;
+        return $this->clienteMapper->insert($this->cliente);
     }
 }
