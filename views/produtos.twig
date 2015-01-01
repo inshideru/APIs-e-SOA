@@ -1,0 +1,38 @@
+{% extends 'layout.twig' %}
+
+{% block aplicacao %}
+    <h1>Produtos</h1>
+{% endblock %}
+
+{% block conteudo %}
+    <div class="row">
+        <div class="col-md-12">
+            <p><a href="{{ path("novo_produto") }}" class="btn btn-info" title="Novo">Novo Produto</a></p>
+        </div>
+    </div>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th class="text-right">Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for produto in produtos %}
+            <tr>
+                <td>{{ produto.nome }}</td>
+                <td>{{ produto.descricao }}</td>
+                <td>R$ {{ produto.valor }}</td>
+                <td class="text-right">
+                    <a href="{{ path("edit_produto") }}" class="btn btn-primary btn-sm" title="Editar"><i
+                                class="glyphicon glyphicon-edit"></i></a>
+                    <a href="{{ path("apagar_produto") }}" class="btn btn-danger btn-sm" title="Apagar"><i
+                                class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

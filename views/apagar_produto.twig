@@ -1,0 +1,10 @@
+{% extends 'layout.twig' %}
+
+{% block aplicacao %}
+    <h1>Apagar produto?</h1>
+{% endblock %}
+
+{% block conteudo %}
+    <a href="{{ path("produtos") }}" class="btn btn-info" title="Voltar"><i class="glyphicon glyphicon-arrow-left"></i> Cancelar</a>
+    <a href="{{ path("produtos") }}" class="btn btn-danger" title="Confirmar"><i class="glyphicon glyphicon-ok"></i> Confirmar</a>
+{% endblock %}

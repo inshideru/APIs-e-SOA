@@ -38,4 +38,9 @@ class ProdutoMapper
             'valor' => $produto->getValor()
         );
     }
+
+    public function fetchAll()
+    {
+        return $this->pdo->query('SELECT * FROM produto');
+    }
 } 

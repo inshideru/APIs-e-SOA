@@ -33,7 +33,7 @@ VALUES
     ('Borracha', 'Borracha especial anti-manchas', 5.5)
 EOT;
 
-$sql = utf8_decode($sql);
+//$sql = utf8_decode($sql);
 
 $stmt = $conexao->prepare($sql);
 $stmt->execute();

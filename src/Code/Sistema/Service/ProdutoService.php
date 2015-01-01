@@ -30,4 +30,9 @@ class ProdutoService
 
         return $this->produtoMapper->insert($this->produto);
     }
+
+    public function fetchAll()
+    {
+        return $this->produtoMapper->fetchAll();
+    }
 } 

@@ -1,0 +1,37 @@
+{% extends 'layout.twig' %}
+
+{% block aplicacao %}
+    <h1>Editar produto</h1>
+{% endblock %}
+
+{% block conteudo %}
+    <a href="{{ path("produtos") }}" class="btn btn-info" title="Voltar"><i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
+
+    <form class="form-horizontal">
+        <fieldset>
+            <div class="form-group">
+                <label for="nome" class="col-lg-2 control-label">Nome</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="nome" placeholder="Nome">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="descricao" class="col-lg-2 control-label">Descrição</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="descricao"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="valor" class="col-lg-2 control-label">Valor</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="valor" placeholder="Valor">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

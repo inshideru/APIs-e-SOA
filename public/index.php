@@ -29,13 +29,30 @@ $app['produtoService'] = function() use ($pdo) {
     return $produtoService;
 };
 
-$app->get("/", function() {
-    return "Olá mundo";
+$app->get("/", function() use ($app) {
+    return $app['twig']->render('index.twig', []);
+})->bind("index");
+
+$app->get("/edit_produto", function() use ($app) {
+    return $app['twig']->render('edit_produto.twig', []);
+})->bind("edit_produto");
+
+$app->get("/apagar_produto", function() use ($app) {
+    return $app['twig']->render('apagar_produto.twig', []);
+})->bind("apagar_produto");
+
+$app->get("/novo_produto", function() use ($app) {
+    return $app['twig']->render('novo_produto.twig', []);
+})->bind("novo_produto");
+
+$app->get("/ola/{nome}", function($nome) use ($app) {
+    return $app['twig']->render('ola.twig', ['nome' => $nome]);
 });
 
-$app->get("/ola/{nome}", function($nome) {
-    return "Ola {$nome}";
-});
+$app->get("/clientes", function () use ($app) {
+    $dados = $app['clienteService']->fetchAll();
+    return $app['twig']->render('clientes.twig', ['clientes' => $dados]);
+})->bind("clientes");
 
 $app->get("/cliente", function () use ($app) {
     $dados['nome'] = "Cliente";
@@ -46,14 +63,11 @@ $app->get("/cliente", function () use ($app) {
     return $app->json($result);
 });
 
-$app->get("/produto", function () use ($app) {
-    $dados['nome'] = "Caderno";
-    $dados['descricao'] = "Caderno aramado com pautas";
-    $dados['valor'] = 6.5;
+$app->get("/produtos", function () use ($app) {
+    $dados = $app['produtoService']->fetchAll();
 
-    $result = $app['produtoService']->insert($dados);
+    return $app['twig']->render('produtos.twig', ['produtos' => $dados]);
 
-    return $app->json($result);
-});
+})->bind("produtos");
 
 $app->run();
